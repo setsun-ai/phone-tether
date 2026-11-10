@@ -1,0 +1,8 @@
+#!/data/data/com.termux/files/usr/bin/sh
+# Termux:Boot запускает это после каждой загрузки. Если tetherd упадёт или /update его перезапустит — поднимаем снова.
+DIR="$(cd "$(dirname "$0")" && pwd)"
+termux-wake-lock
+while true; do
+  python "$DIR/tetherd.py" >> "$HOME/.tetherd/stdout.log" 2>&1
+  sleep 15
+done
